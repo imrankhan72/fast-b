@@ -13,6 +13,7 @@ async def root():
     info = client.get_exchange_info()
 
     symbols = [x['symbol'] for x in info['symbols']]
+    return symbols
 
     exclude = ['UP', 'DOWN', 'BEAR', 'BULL']  # Exclude leverage tokens
 
