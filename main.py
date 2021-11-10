@@ -1,5 +1,6 @@
 from fastapi import FastAPI
 from binance.client import Client
+from tqdm import tqdm
 import pandas as pd
 from config import Config
 
@@ -18,7 +19,7 @@ non_lev = [symbol for symbol in symbols if all(excludes not in symbol for exclud
 relevant = [symbol for symbol in non_lev if symbol.endswith('USDT')]
 
 klines = {}
-for symbol in relevant:
+for symbol in tqdm(relevant):
     klines[symbol] = client.get_historical_klines(symbol, '1m', '15 mins ago utc')
 
 returns, symbols = [], []
